@@ -1,26 +1,130 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@custom-variant dark (&:is(.dark *));
 
 @theme inline {
+  --font-dm-sans: var(--font-dm-sans);
+  --font-header: var(--font-space-grotesk);
+
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+  --radius-4xl: calc(var(--radius) + 16px);
+
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --color-clean: var(--tag-clean);
+  --color-hero-scrim: var(--hero-scrim);
+  --color-plant: var(--tag-plant);
+  --color-blood: var(--tag-blood);
+  --color-aware: var(--tag-aware);
+  --color-donate: var(--tag-donate);
+  --color-campaign: var(--tag-campaign);
+  --color-health: var(--tag-health);
+
+  --shadow-soft: 0 8px 30px -12px color-mix(in oklab, var(--primary) 25%, transparent);
+  --shadow-card: 0 2px 12px -4px color-mix(in oklab, var(--foreground) 12%, transparent);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+:root {
+  --radius: 0.75rem;
+  --background: oklch(0.99 0.005 240);
+  --foreground: oklch(0.25 0.04 262);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.25 0.04 262);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.25 0.04 262);
+  --primary: oklch(0.55 0.19 258);
+  --primary-foreground: oklch(0.99 0.003 250);
+  --secondary: oklch(0.95 0.02 250);
+  --secondary-foreground: oklch(0.35 0.08 258);
+  --muted: oklch(0.96 0.012 250);
+  --muted-foreground: oklch(0.52 0.03 258);
+  --accent: oklch(0.94 0.03 250);
+  --accent-foreground: oklch(0.3 0.07 258);
+  --destructive: oklch(0.6 0.22 20);
+  --destructive-foreground: oklch(0.99 0.003 250);
+  --border: oklch(0.92 0.015 250);
+  --input: oklch(0.92 0.015 250);
+  --ring: oklch(0.55 0.19 258);
+
+  --tag-clean: oklch(0.6 0.13 165);
+  --tag-plant: oklch(0.62 0.15 145);
+  --tag-blood: oklch(0.58 0.2 15);
+  --tag-aware: oklch(0.55 0.17 290);
+  --tag-donate: oklch(0.68 0.14 70);
+  --tag-campaign: oklch(0.63 0.16 42);
+  --tag-health: oklch(0.58 0.12 220);
+  --hero-scrim: oklch(0.26 0.06 262);
+}
+
+.dark {
+  --background: oklch(0.22 0.05 262);
+  --foreground: oklch(0.95 0.01 250);
+  --card: oklch(0.26 0.05 262);
+  --card-foreground: oklch(0.95 0.01 250);
+  --popover: oklch(0.26 0.05 262);
+  --popover-foreground: oklch(0.95 0.01 250);
+  --primary: oklch(0.66 0.19 256);
+  --primary-foreground: oklch(0.18 0.05 262);
+  --secondary: oklch(0.31 0.05 262);
+  --secondary-foreground: oklch(0.92 0.02 250);
+  --muted: oklch(0.3 0.045 262);
+  --muted-foreground: oklch(0.72 0.03 255);
+  --accent: oklch(0.32 0.06 258);
+  --accent-foreground: oklch(0.95 0.01 250);
+  --destructive: oklch(0.66 0.2 22);
+  --destructive-foreground: oklch(0.18 0.05 262);
+  --border: oklch(0.36 0.05 262);
+  --input: oklch(0.36 0.05 262);
+  --ring: oklch(0.66 0.19 256);
+  --hero-scrim: oklch(0.14 0.045 262);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-dm-sans);
+  }
+
+  h1, h2, h3 {
+    font-family: var(--font-header);
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@utility section-container {
+  margin-inline: auto;
+  width: 100%;
+  max-width: 72rem;
+  padding-inline: 1rem;
+
+  @variant sm {
+    padding-inline: 1.5rem;
+  }
 }
