@@ -26,7 +26,7 @@ const SingleEventCard = () => {
                         </span>
                     </div>
 
-                    <Link href='/' className="font-display text-base font-semibold leading-snug hover:text-primary line-clamp-1">
+                    <Link href={'/events/sdjkf'} className="font-display text-base font-semibold leading-snug hover:text-primary line-clamp-1">
                         Weekend Food Pack Distribution
                     </Link>
 
@@ -38,7 +38,7 @@ const SingleEventCard = () => {
                         <p className="text-xs font-normal text-foreground/70 line-clamp-2">On 18th January 2025, Ramakrishna Mission, Chandpur, Bangladesh, conducted a relief distribution program in community center.</p>
                     </div>
 
-                    <Link href='/' className="px-4 py-2.5 mt-4 w-full flex items-center justify-center text-[15px] shadow-md font-semibold gap-1.5 bg-primary text-white rounded-md transition-all hover:bg-primary/90 hover:shadow-md hover:shadow-primary/50 ">View Events <ArrowRight className="w-4 h-4" strokeWidth={3} /></Link>
+                    <Link href={'/events/sdjkf'} className="px-4 py-2.5 mt-4 w-full flex items-center justify-center text-[15px] shadow-md font-semibold gap-1.5 bg-primary text-white rounded-md transition-all hover:bg-primary/90 hover:shadow-md hover:shadow-primary/50 ">View Events <ArrowRight className="w-4 h-4" strokeWidth={3} /></Link>
                 </div>
             </div>
         </div>

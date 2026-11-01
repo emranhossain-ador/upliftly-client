@@ -1,10 +1,13 @@
-
+"use client"
 import { LogIn } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import ThemeToggle from "@/components/ThemeToggle";
+import { usePathname } from "next/navigation";
 
 const TopHeader = () => {
+
+  const active = usePathname();
 
   return (
     <header className="sticky top-0 z-40 border-b bg-background/85 backdrop-blur">
@@ -20,10 +23,10 @@ const TopHeader = () => {
 
         {/* nav section */}
         <nav className="flex items-center gap-2.5">
-          <Link href={'/'} className="hidden rounded-md px-3 py-2 text-sm font-medium text-primary transition-colors sm:block">Home</Link>
+          <Link href={'/'} className={`hidden rounded-md px-3 py-2 text-sm font-medium transition-colors sm:block ${active === '/' ? 'text-primary' : 'text-foreground/90  hover:text-primary'}`}>Home</Link>
           <Link
             href="/events"
-            className="hidden rounded-md px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-accent hover:text-foreground sm:block"
+            className={`hidden rounded-md px-3 py-2 text-sm font-medium transition-colors sm:block ${active === '/events' ? 'text-primary' : 'text-foreground/90 hover:text-primary '}`}
           >
             Upcoming Events
           </Link>
