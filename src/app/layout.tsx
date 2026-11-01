@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { DM_Sans, Space_Grotesk } from "next/font/google";
 import "./globals.css";
 import TopHeader from "@/components/TopHeader";
+import Footer from "@/components/Footer";
 
 const dm_Sans = DM_Sans({
   variable: "--font-dm-sans",
@@ -36,6 +37,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       <body className="min-h-full flex flex-col">
         <TopHeader />
         {children}
+        <Footer />
       </body>
     </html>
   );
