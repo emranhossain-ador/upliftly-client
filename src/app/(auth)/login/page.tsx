@@ -28,12 +28,12 @@ export default function LoginPage() {
 
                 {/* Back Home */}
                 <Link
-                        href="/"
-                        className="mx-auto absolute top-10 left-4 flex w-fit items-center gap-2 text-sm font-semibold text-muted-foreground transition-colors hover:text-primary"
-                    >
-                        <ArrowLeft className="h-4 w-4" />
-                        Back to Home
-                    </Link>
+                    href="/"
+                    className="mx-auto absolute top-10 left-4 flex w-fit items-center gap-2 text-sm font-semibold text-muted-foreground transition-colors hover:text-primary"
+                >
+                    <ArrowLeft className="h-4 w-4" />
+                    Back to Home
+                </Link>
 
                 {/* Background Decorations */}
                 <div className="pointer-events-none absolute -left-24 -top-24 h-80 w-80 rounded-full bg-primary/10 blur-3xl" />
@@ -79,7 +79,7 @@ export default function LoginPage() {
             </section>
 
             {/* Right Side - Login Form */}
-            <section className="relative flex min-h-screen items-center justify-center overflow-hidden px-5 py-0 sm:px-10">
+            <section className="relative flex min-h-screen items-center justify-center overflow-hidden px-3 py-0 sm:px-10">
 
                 <div className="pointer-events-none absolute -right-32 -top-32 h-80 w-80 rounded-full bg-primary/5 blur-3xl" />
                 <div className="pointer-events-none absolute -bottom-32 -left-32 h-80 w-80 rounded-full bg-primary/5 blur-3xl" />
@@ -87,7 +87,7 @@ export default function LoginPage() {
                 <div className="relative w-full max-w-md">
 
                     {/* Login Card */}
-                    <div className="rounded-3xl border border-border bg-card p-5 shadow-soft sm:p-7">
+                    <div className="rounded-3xl border border-border bg-card px-4 py-2 shadow-soft sm:p-7">
 
                         {/* Heading */}
                         <div className="mb-8">
@@ -127,7 +127,7 @@ export default function LoginPage() {
                         <p className="mt-8 text-center text-sm text-muted-foreground">
                             Don't have an account?{" "}
                             <Link
-                                href="/"
+                                href="/register"
                                 className="font-bold text-primary transition-colors hover:underline"
                             >
                                 Create an account

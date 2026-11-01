@@ -18,7 +18,7 @@ const Footer = () => {
 
     const active = usePathname();
 
-    if (active === '/login') {
+    if (active === '/login' || active === '/register') {
         return null;
     }
 

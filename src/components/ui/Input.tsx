@@ -5,7 +5,7 @@ interface InputProps {
     name: string;
     id?: string;
     autoComplete: string;
-    isRequired: boolean;
+    isRequired?: boolean;
     className?: string;
 }
 
