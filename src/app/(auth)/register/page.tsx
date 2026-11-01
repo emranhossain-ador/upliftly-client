@@ -13,7 +13,7 @@ const RegisterPage = () => {
     return (
         <div className="grid min-h-screen bg-background lg:grid-cols-2">
             <div className="order-2 flex items-center justify-center px-4 py-2 sm:p-7 lg:order-1">
-                <div className="w-full max-w-md rounded-2xl border bg-card p-6 shadow-soft">
+                <div className="w-full max-w-md rounded-2xl border bg-card p-4 md:p-7 shadow-soft">
 
                     <div className="text-center">
                         <h1 className="font-display text-2xl font-semibold">Create Account</h1>
