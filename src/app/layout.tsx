@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { DM_Sans, Space_Grotesk } from "next/font/google";
+import { Suspense } from "react";
 import "./globals.css";
 import TopHeader from "@/components/TopHeader";
 import Footer from "@/components/Footer";
@@ -24,7 +25,6 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     <html
       lang="en"
       className={`${dm_Sans.variable} ${spaceGrotesk.variable} h-full antialiased`}
-      suppressHydrationWarning
     >
       <head>
         {/* Apply the theme cookie before first paint so there is no flash. */}
@@ -35,9 +35,19 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         />
       </head>
       <body className="min-h-full flex flex-col">
-        <TopHeader />
+        <Suspense
+          fallback={
+            <header className="sticky top-0 z-40 border-b bg-background/85 backdrop-blur">
+              <div className="section-container h-16" />
+            </header>
+          }
+        >
+          <TopHeader />
+        </Suspense>
         {children}
-        <Footer />
+        <Suspense fallback={<div className="mt-16 min-h-16 border-t bg-card" />}>
+          <Footer />
+        </Suspense>
       </body>
     </html>
   );

@@ -9,6 +9,10 @@ const TopHeader = () => {
 
   const active = usePathname();
 
+  if (active === '/login') {
+    return null;
+  }
+
   return (
     <header className="sticky top-0 z-40 border-b bg-background/85 backdrop-blur">
       <div className="section-container flex h-16 items-center justify-between gap-3">
