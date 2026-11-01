@@ -9,7 +9,7 @@ const EventsPage = () => {
 
             <EventBanner />
 
-            <section className="section-container space-y-10">
+            <section className="section-container space-y-10 mt-12">
                 {/* Filter Area */}
                 <EventsFilter />
 

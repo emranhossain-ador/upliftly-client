@@ -4,9 +4,9 @@ import { LucideIcon } from "lucide-react";
 interface IconInputProps {
     Icon: LucideIcon;
     type: string;
-    placeholder: string;
+    placeholder?: string;
     name: string;
-    autoComplete: string;
+    autoComplete?: string;
     isRequired?: boolean;
 }
 

@@ -65,7 +65,7 @@ export default function ProfilePage() {
             </section>
 
             {/* ================= MAIN CONTENT ================= */}
-            <section className="section-container my-14 md:my-18">
+            <section className="section-container mt-12 ">
 
                 <div className="grid grid-cols-1 items-start gap-8 lg:grid-cols-12">
 
@@ -215,7 +215,7 @@ export default function ProfilePage() {
                     </div>
 
                     {/* RIGHT COLUMN - QUICK ACTIONS */}
-                    <ProfileQuickAction/>
+                    <ProfileQuickAction />
 
                 </div>
             </section>

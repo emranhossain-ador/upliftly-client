@@ -1,10 +1,10 @@
 interface InputProps {
 
     type: string;
-    placeholder: string;
+    placeholder?: string;
     name: string;
     id?: string;
-    autoComplete: string;
+    autoComplete?: string;
     isRequired?: boolean;
     className?: string;
 }

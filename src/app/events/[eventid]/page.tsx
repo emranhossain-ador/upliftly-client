@@ -7,7 +7,6 @@ import {
     Rocket,
 } from "lucide-react";
 import EventHero from "@/components/EventHero";
-import Image from "next/image";
 import Link from "next/link";
 import JoinEventBtn from "@/components/JoinEventBtn";
 
@@ -119,7 +118,7 @@ const EventDetails = () => {
     return (
         <main className="relative isolate overflow-hidden py-6  sm:py-10">
 
-            <div className="section-container relative space-y-6 xl:space-y-8">
+            <div className="section-container mt-3 md:mt-5 relative space-y-6 xl:space-y-8">
                 <EventHero />
 
                 <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_21rem] xl:gap-8 2xl:grid-cols-[minmax(0,1fr)_23rem]">

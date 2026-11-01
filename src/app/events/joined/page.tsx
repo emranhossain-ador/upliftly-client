@@ -1,7 +1,5 @@
 import MyJoinedEventCard from "@/components/MyJoinedEventCard";
 import Breadcrumb from "@/components/ui/Breadcrumb";
-import { ChevronRight, Home } from "lucide-react";
-import Link from "next/link";
 
 
 const JoinedEventsPage = () => {
@@ -17,7 +15,7 @@ const JoinedEventsPage = () => {
 
                     <div className="max-w-2xl">
                         {/* Breadcrumb */}
-                        <Breadcrumb title="My Joined Events"/>
+                        <Breadcrumb title="My Joined Events" />
 
 
                         <h1 className="font-header text-4xl font-extrabold tracking-tight text-secondary-foreground sm:text-5xl lg:text-6xl">
@@ -35,9 +33,9 @@ const JoinedEventsPage = () => {
 
 
             {/* ================= MAIN CONTENT ================= */}
-            <section className="section-container my-14 md:my-18">
+            <section className="section-container mt-12 ">
 
-                <MyJoinedEventCard/>
+                <MyJoinedEventCard />
 
             </section>
 
