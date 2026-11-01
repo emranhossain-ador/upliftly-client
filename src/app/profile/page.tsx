@@ -73,7 +73,7 @@ export default function ProfilePage() {
                 <div className="absolute -left-32 -top-32 h-80 w-80 rounded-full bg-primary/10 blur-3xl" />
                 <div className="absolute right-1/4 top-0 h-64 w-64 rounded-full bg-blue-400/10 blur-3xl" />
 
-                <div className="relative mx-auto flex min-h-62.5 max-w-7xl items-center px-5 py-12 sm:px-8 lg:min-h-68.75 lg:px-10">
+                <div className="relative section-container flex min-h-62.5 items-center px-5 py-12 sm:px-8 lg:min-h-68.75 lg:px-10">
 
                     <div className="max-w-2xl">
                         <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-primary/10 bg-background/70 px-4 py-2 text-sm font-semibold text-primary shadow-sm backdrop-blur font-header">
@@ -96,7 +96,7 @@ export default function ProfilePage() {
             </section>
 
             {/* ================= MAIN CONTENT ================= */}
-            <section className="mx-auto max-w-7xl px-5 py-10 sm:px-8 lg:px-10 lg:py-12">
+            <section className="section-container my-14 md:my-18">
 
                 <div className="grid grid-cols-1 items-start gap-8 lg:grid-cols-12">
 
