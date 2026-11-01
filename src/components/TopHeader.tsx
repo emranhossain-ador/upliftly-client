@@ -10,8 +10,8 @@ const TopHeader = () => {
     <header className="sticky top-0 z-40 border-b bg-background/85 backdrop-blur">
       <div className="section-container flex h-16 items-center justify-between gap-3">
         <Link href="/" className="flex items-center gap-2">
-          <span className="h-14 w-14 shrink-0">
-            <Image src="/images/light-logo.png" alt="logo" width={100} height={100} className="w-full h-full object-cover" />
+          <span className="h-12 w-12 md:h-14 md:w-14 shrink-0">
+            <Image src="/images/logo.png" alt="logo" width={100} height={100} className="w-full h-full object-cover" />
           </span>
           <span className="font-header text-2xl font-black tracking-tight">
             Upliftly

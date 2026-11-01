@@ -4,7 +4,7 @@ import Image from "next/image";
 const NewsletterSection = () => {
     return (
         <section className="section-container my-14 md:my-18">
-            <div className="relative overflow-hidden rounded-3xl bg-secondary px-6 py-8 shadow-card sm:px-10">
+            <div className="relative overflow-hidden rounded-3xl bg-card border-border px-6 py-8 shadow-card sm:px-10">
                 <div className="flex flex-col items-center gap-6 md:flex-row md:gap-10">
                     <Image alt="brands" width={96} height={96} className="h-20 w-20 shrink-0 object-contain drop-shadow" src="/images/envelope.png" />
 

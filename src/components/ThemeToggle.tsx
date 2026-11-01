@@ -38,11 +38,9 @@ const ThemeToggle = () => {
       onClick={toggleTheme}
       aria-label="Toggle dark mode"
       title="Toggle dark mode"
-      className="flex h-9 w-9 items-center justify-center rounded-md border bg-background/60 text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
+      className="flex h-9 w-9 items-center justify-center rounded-md border bg-background/60 text-muted-foreground transition-colors hover:bg-accent hover:text-foreground cursor-pointer"
     >
-      {/* Both icons are always rendered; the active one is swapped in/out with
-          an animated show/hide driven by the `dark` class on <html>. */}
-      <span className="grid h-5 w-5 place-items-center">
+      <span className="grid h-5 w-5 place-items-center ">
         <Sun
           aria-hidden="true"
           className="col-start-1 row-start-1 h-5 w-5 rotate-0 scale-100 opacity-100 transition-all duration-300 ease-in-out dark:-rotate-90 dark:scale-0 dark:opacity-0"

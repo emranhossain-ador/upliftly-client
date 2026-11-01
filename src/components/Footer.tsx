@@ -1,6 +1,15 @@
 import { Mail, MapPin, Phone } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { FaFacebook, } from "react-icons/fa";
+import { FaInstagram, FaXTwitter } from "react-icons/fa6";
+
+
+const social = [
+    { icon: <FaFacebook />, url: "https://www.facebook.com/upliftly" },
+    { icon: <FaXTwitter />, url: "https://x.com/upliftly" },
+    { icon: <FaInstagram />, url: "https://www.instagram.com/upliftly" },
+]
 
 const Footer = () => {
     return (
@@ -9,10 +18,10 @@ const Footer = () => {
                 <div className="md:col-span-2">
                     <div className="flex items-center gap-2">
                         <div className="w-15 h-15 shrink-0">
-                            <Image src={'/images/light-logo.png'} alt="ServeCircle" width={60} height={60} className="w-full h-full object-cover" />
+                            <Image src={'/images/logo.png'} alt="ServeCircle" width={60} height={60} className="w-full h-full object-cover" />
                         </div>
 
-                        <span className="font-display text-xl font-bold tracking-tight text-white">
+                        <span className="font-display text-xl font-bold tracking-tight text-foreground">
                             Upliftly
                         </span>
                     </div>
@@ -22,18 +31,14 @@ const Footer = () => {
                     </p>
                     <div className="mt-5 flex gap-3">
 
-                        <Link href="/" target="_blank" rel="noreferrer" aria-label="X (Twitter)" className="flex size-9 items-center justify-center rounded-full bg-muted text-foreground transition-colors hover:bg-brand-teal hover:text-white">
-                            <svg
-                                viewBox="0 0 24 24"
-                                fill="currentColor"
-                                className="size-4"
-                                aria-hidden="true"
-                            >
-                                <path
-                                    d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231 5.451-6.231Zm-1.161 17.52h1.833L7.084 4.126H5.117l11.966 15.644Z"
-                                ></path>
-                            </svg>
-                        </Link>
+                        {
+                            social.map((media, i) =>
+                                <Link key={i} href={media.url} target="_blank" rel="noreferrer" className="flex size-9 items-center justify-center rounded-md shadow-md bg-muted transition-colors border border-primary/80 text-primary hover:bg-primary hover:text-white ">
+                                    {media.icon}
+                                </Link>
+                            )
+                        }
+
 
                     </div>
                 </div>
