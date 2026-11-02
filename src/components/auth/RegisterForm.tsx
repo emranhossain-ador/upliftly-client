@@ -5,6 +5,7 @@ import React, { useState } from "react";
 import { signUp } from "@/lib/auth-client";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
+import SubmitButton from "../ui/SubmitButton";
 
 
 type ErrorType = {
@@ -17,10 +18,8 @@ type ErrorType = {
 const RegisterForm = () => {
 
     const [error, setErrors] = useState<ErrorType>({});
-
     const [password, setPassword] = useState("");
     const [showPassword, setShowPassword] = useState(false);
-
     const [isLoading, setIsLoading] = useState(false);
 
     const checks = [
@@ -184,20 +183,7 @@ const RegisterForm = () => {
             </div>
 
 
-            <button
-                type="submit"
-                disabled={isLoading}
-                className="group flex h-12 w-full cursor-pointer items-center justify-center gap-2 rounded-xl bg-primary px-5 text-sm font-bold text-white shadow-lg shadow-primary/20 transition-all hover:-translate-y-0.5 hover:shadow-xl hover:shadow-primary/25 active:translate-y-0 disabled:cursor-not-allowed disabled:opacity-70"
-            >
-                {isLoading ? (
-                    <span className="h-5 w-5 animate-spin rounded-full border-2 border-white/30 border-t-white" />
-                ) : (
-                    <>
-                        Register
-                        <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-                    </>
-                )}
-            </button>
+            <SubmitButton isLoading={isLoading} title="Sign Up" />
 
         </form>
 

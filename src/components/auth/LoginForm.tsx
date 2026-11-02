@@ -4,19 +4,87 @@ import { ArrowRight, Eye, EyeOff, Lock, Mail } from "lucide-react";
 import Link from "next/link";
 import Label from "../ui/Label";
 import IconInput from "../ui/IconInput";
-import { useState } from "react";
+import React, { useState } from "react";
+import { signIn } from "@/lib/auth-client";
+import { toast } from "react-toastify";
+import { useRouter } from "next/navigation";
+import SubmitButton from "../ui/SubmitButton";
+
+
+type ErrorType = {
+    email?: string;
+    password?: string;
+}
 
 const LoginForm = () => {
+
+    const [error, setErros] = useState<ErrorType>({});
     const [showPassword, setShowPassword] = useState(false);
     const [rememberMe, setRememberMe] = useState(true);
+    const [isLoading, setIsLoading] = useState(false);
+
+    const router = useRouter();
+
+    const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        const form = e.currentTarget;
+        const formData = new FormData(form);
+
+        const email = String(formData.get('email') ?? "").trim();
+        const password = String(formData.get('password') ?? "").trim();
+
+
+        const newErrors: ErrorType = {};
+
+        if (!email) {
+            newErrors.email = "Email is required!";
+        }
+
+        if (!password) {
+            newErrors.password = "Password is required!";
+        }
+
+        setErros(newErrors);
+
+        if (Object.keys(newErrors).length === 0) {
+
+            setIsLoading(true);
+
+            try {
+                const { error } = await signIn.email({
+                    email: email as string,
+                    password: password as string
+                });
+
+                if (error) {
+                    toast.error(error.message);
+                } else {
+                    form.reset();
+                    toast.success("Login Success");
+                    router.push('/events');
+                }
+
+            } catch (error) {
+                toast.error("Login Failed");
+            } finally {
+                setIsLoading(false);
+            }
+        }
+
+    }
+
     return (
-        <form className="space-y-5">
+        <form onSubmit={handleLogin} className="space-y-5">
 
             {/* Email */}
             <div className="space-y-2">
                 <Label labelText="Email" isRequired={true} />
 
-                <IconInput Icon={Mail} type="email" placeholder="you@example.com" name="email" autoComplete="email" isRequired={true} />
+                <IconInput Icon={Mail} type="email" placeholder="you@example.com" name="email" autoComplete="email" />
+                {
+                    error?.email && <p className="mt-1.5 px-1 text-xs text-red-500">{error.email}</p>
+                }
+
             </div>
 
             {/* Password */}
@@ -31,7 +99,8 @@ const LoginForm = () => {
                         type={showPassword ? "text" : "password"}
                         placeholder="Enter your password"
                         autoComplete="current-password"
-                        required
+                        minLength={6}
+                        maxLength={10}
                         className="h-12 w-full rounded-xl border border-input bg-background pl-11 pr-12 text-sm outline-none transition-all placeholder:text-muted-foreground/70 focus:border-primary focus:ring-4 focus:ring-primary/10"
                     />
 
@@ -47,6 +116,10 @@ const LoginForm = () => {
                         }
                     </button>
                 </div>
+                {
+                    error?.password && <p className="mt-1.5 px-1 text-xs text-red-500">{error.password}</p>
+                }
+
             </div>
 
             {/* Remember Me */}
@@ -70,13 +143,7 @@ const LoginForm = () => {
             </div>
 
             {/* Login Button */}
-            <button
-                type="submit"
-                className="group flex h-12 w-full items-center justify-center gap-2 rounded-xl bg-primary px-5 text-sm font-bold text-primary-foreground shadow-lg shadow-primary/20 transition-all hover:-translate-y-0.5 hover:shadow-xl hover:shadow-primary/25 active:translate-y-0"
-            >
-                Sign In
-                <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-            </button>
+            <SubmitButton isLoading={isLoading} title="Sign In" />
         </form>
     )
 }

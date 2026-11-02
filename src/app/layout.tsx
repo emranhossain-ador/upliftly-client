@@ -1,10 +1,8 @@
 import type { Metadata } from "next";
 import { DM_Sans, Space_Grotesk } from "next/font/google";
-import { Suspense } from "react";
 import "./globals.css";
-import TopHeader from "@/components/TopHeader";
-import Footer from "@/components/Footer";
 import { ToastContainer } from "react-toastify";
+import MainLayout from "@/components/MainLayout";
 
 const dm_Sans = DM_Sans({
   variable: "--font-dm-sans",
@@ -28,7 +26,6 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${dm_Sans.variable} ${spaceGrotesk.variable} h-full antialiased`}
     >
       <head>
-        {/* Apply the theme cookie before first paint so there is no flash. */}
         <script
           dangerouslySetInnerHTML={{
             __html: `(function(){try{var m=document.cookie.match(/(?:^|; )theme=([^;]*)/);document.documentElement.classList.toggle("dark",!!m&&decodeURIComponent(m[1])==="dark")}catch(e){}})()`,
@@ -37,21 +34,11 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       </head>
       <body className="min-h-full flex flex-col">
         <ToastContainer position="top-right" theme="colored" closeButton={true} autoClose={2500} pauseOnHover={true} />
-        <Suspense
-          fallback={
-            <header className="sticky top-0 z-40 border-b bg-background/85 backdrop-blur">
-              <div className="section-container h-16" />
-            </header>
-          }
-        >
-          <TopHeader />
-        </Suspense>
 
-        {children}
 
-        <Suspense fallback={<div className="mt-16 min-h-16 border-t bg-card" />}>
-          <Footer />
-        </Suspense>
+        <MainLayout>{children}</MainLayout>
+
+
       </body>
     </html>
   );

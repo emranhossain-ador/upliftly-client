@@ -1,7 +1,4 @@
-
 "use client";
-
-import { useState } from "react";
 import {
     UserRound,
     Mail,
@@ -17,21 +14,21 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 import ProfileQuickAction from "@/components/ProfileQuickActions";
+import { useSession } from "@/lib/auth-client";
 
 
-
+const formatDate = (date: Date | string) => {
+    return new Date(date).toLocaleDateString("en-US", {
+        day: "2-digit",
+        month: "long",
+        year: "numeric",
+    });
+};
 
 export default function ProfilePage() {
 
-    const [profile, setProfile] = useState({
-        name: "Ersan Hosain",
-        email: "ersan@example.com",
-        photoURL: "",
-        location: "Dhaka, Bangladesh",
-        memberSince: "Nov 2, 2026",
-    });
-
-
+    const session = useSession();
+    const user = session?.data?.user;
 
     return (
         <main className="min-h-screen bg-background">
@@ -91,18 +88,16 @@ export default function ProfilePage() {
                                     {/* User Details */}
                                     <div className="min-w-0 flex-1 text-center sm:text-left">
                                         <div className="flex flex-wrap items-center justify-center gap-2 sm:justify-start">
-                                            <h2 className="font-display text-2xl font-extrabold tracking-tight sm:text-3xl">
-                                                {profile.name}
-                                            </h2>
-                                            <BadgeCheck
-                                                size={24}
-                                                className="fill-primary text-primary-foreground"
-                                            />
+
+                                            <h2 className="font-display text-2xl font-extrabold tracking-tight sm:text-3xl">{user?.name}</h2>
+
+                                            {user?.emailVerified && <BadgeCheck size={24} className="fill-primary text-primary-foreground" />}
+
                                         </div>
 
                                         <div className="mt-2 flex items-center justify-center gap-2 text-sm text-muted-foreground sm:justify-start">
                                             <Mail size={17} className="shrink-0 text-primary" />
-                                            <span className="break-all">{profile.email}</span>
+                                            <span className="break-all">{user?.email}</span>
                                         </div>
 
                                         <div className="mt-4 flex justify-center sm:justify-start">
@@ -177,7 +172,7 @@ export default function ProfilePage() {
                                     <p className="text-sm font-bold">Member Since</p>
                                     <p className="mt-1 flex items-center gap-1.5 text-sm text-muted-foreground">
                                         <CalendarDays size={14} />
-                                        {profile.memberSince}
+                                        {user ? formatDate(user?.createdAt) : 'N/A'}
                                     </p>
                                 </div>
                             </div>
@@ -189,7 +184,7 @@ export default function ProfilePage() {
                                 <div>
                                     <p className="text-sm font-bold">Location</p>
                                     <p className="mt-1 text-sm text-muted-foreground">
-                                        {profile.location}
+                                        Dhaka, Bangladesh
                                     </p>
                                 </div>
                             </div>

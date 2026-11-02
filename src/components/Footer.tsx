@@ -1,9 +1,7 @@
-"use client"
 
 import { Mail, MapPin, Phone } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
 import { FaFacebook, } from "react-icons/fa";
 import { FaInstagram, FaXTwitter } from "react-icons/fa6";
 
@@ -16,11 +14,6 @@ const social = [
 
 const Footer = () => {
 
-    const active = usePathname();
-
-    if (active === '/login' || active === '/register') {
-        return null;
-    }
 
     return (
         <footer className="mt-16 border-t bg-card">
