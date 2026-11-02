@@ -4,6 +4,7 @@ import { Suspense } from "react";
 import "./globals.css";
 import TopHeader from "@/components/TopHeader";
 import Footer from "@/components/Footer";
+import { ToastContainer } from "react-toastify";
 
 const dm_Sans = DM_Sans({
   variable: "--font-dm-sans",
@@ -35,6 +36,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         />
       </head>
       <body className="min-h-full flex flex-col">
+        <ToastContainer position="top-right" theme="colored" closeButton={true} autoClose={2500} pauseOnHover={true} />
         <Suspense
           fallback={
             <header className="sticky top-0 z-40 border-b bg-background/85 backdrop-blur">
@@ -44,7 +46,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         >
           <TopHeader />
         </Suspense>
+
         {children}
+
         <Suspense fallback={<div className="mt-16 min-h-16 border-t bg-card" />}>
           <Footer />
         </Suspense>

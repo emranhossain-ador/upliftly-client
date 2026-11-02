@@ -45,7 +45,7 @@ const HeroSection = () => {
                             <button className="px-6 py-3 text-sm font-semibold rounded-md bg-primary text-white tracking-wider cursor-pointer transition-all hover:scale-105">
                                 <Link href="/events" className="inline-flex items-center gap-1.5">Explore Events <ArrowRight className="w-4 h-4" strokeWidth={2} /></Link>
                             </button>
-                            <Link href="/events" className=" px-6 py-3 text-sm font-semibold tracking-wide rounded-md bg-white/10 text-white hover:bg-white/20 hover:text-white border border-white/50 dark:border-white/20 inline-flex items-center gap-1.5"><HeartPlus className="w-4 h-4" /> Create an Event</Link>
+                            <Link href="/events/create" className=" px-6 py-3 text-sm font-semibold tracking-wide rounded-md bg-white/10 text-white hover:bg-white/20 hover:text-white border border-white/50 dark:border-white/20 inline-flex items-center gap-1.5"><HeartPlus className="w-4 h-4" /> Create an Event</Link>
                         </div>
                     </div>
                 </div>

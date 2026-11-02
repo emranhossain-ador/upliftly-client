@@ -41,16 +41,16 @@ const TopHeader = () => {
           <ThemeToggle />
 
           {/* Login & Register btn */}
-          {/* <Link href={'/login'} className="text-[15px] font-semibold px-4 py-2 tracking-wide bg-primary text-white shadow-md shadow-primary/40 transition-all hover:shadow-none rounded-md inline-flex items-center gap-1.5"><LogIn className="h-4 w-4" strokeWidth={3} /> Login</Link> */}
+          <Link href={'/login'} className="text-[15px] font-semibold px-4 py-2 tracking-wide bg-primary text-white shadow-md shadow-primary/40 transition-all hover:shadow-none rounded-md inline-flex items-center gap-1.5"><LogIn className="h-4 w-4" strokeWidth={3} /> Login</Link>
 
 
-          <Link
+          {/* <Link
             href="/profile"
             aria-label="My profile"
             className="flex h-9 w-9 items-center justify-center rounded-full bg-primary/10 text-primary transition-colors hover:bg-primary/20"
           >
             <UserRound className="h-5 w-5" />
-          </Link>
+          </Link> */}
         </div>
       </div>
     </header>
