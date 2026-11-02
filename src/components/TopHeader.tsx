@@ -1,16 +1,25 @@
 "use client"
-import { LogIn, UserRound } from "lucide-react";
+import { LogIn } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import ThemeToggle from "@/components/ThemeToggle";
 import { usePathname } from "next/navigation";
-import { signOut, useSession } from "@/lib/auth-client";
+import { useSession } from "@/lib/auth-client";
+import LogoutButton from "./LogoutButton";
+
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 const TopHeader = () => {
 
   const active = usePathname();
   const session = useSession();
   const user = session?.data?.user;
+
 
   return (
     <header className="sticky top-0 z-40 border-b bg-background/85 backdrop-blur">
@@ -44,16 +53,26 @@ const TopHeader = () => {
               <Link href={'/login'} className="text-[15px] font-semibold px-4 py-2 tracking-wide bg-primary text-white shadow-md shadow-primary/40 transition-all hover:shadow-none rounded-md inline-flex items-center gap-1.5"><LogIn className="h-4 w-4" strokeWidth={3} /> Login</Link>
             ) : (
               <>
-                <Link
-                  href="/profile"
-                  aria-label="My profile"
-                  className="flex h-9 w-9 items-center justify-center rounded-full bg-primary/10 text-primary transition-colors hover:bg-primary/20"
-                >
-                  <UserRound className="h-5 w-5" />
-                </Link>
 
+                <TooltipProvider>
+                  <Tooltip>
+                    <TooltipTrigger key={'bottom'}>
+                      <Link
+                        href="/profile"
+                        aria-label="My profile"
+                        className="flex h-9.5 w-9.5 shrink-0 items-center justify-center border border-primary rounded-full"
+                      >
+                        <Image src={'/images/avatar.jpeg'} width={36} height={36} alt="avatar" className="w-full h-full object-cover rounded-full" />
+                      </Link>
+                    </TooltipTrigger>
 
-                <button type="button" onClick={() => signOut()} className="text-[15px] font-semibold px-4 py-2 tracking-wide bg-rose-500 text-white shadow-md shadow-red-400/40 transition-all hover:shadow-none rounded-md inline-flex items-center gap-1.5 cursor-pointer"> LogOut</button>
+                    <TooltipContent side="bottom">
+                      <p>Profile</p>
+                    </TooltipContent>
+                  </Tooltip>
+                </TooltipProvider>
+
+                <LogoutButton />
 
               </>
             )

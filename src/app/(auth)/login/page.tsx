@@ -1,3 +1,4 @@
+"use client";
 
 import {
     Heart,
@@ -6,6 +7,8 @@ import {
 import Image from "next/image";
 import Link from "next/link";
 import LoginForm from "@/components/auth/LoginForm";
+import { signIn } from "@/lib/auth-client";
+import { toast } from "react-toastify";
 
 function GoogleIcon() {
     return (
@@ -19,6 +22,18 @@ function GoogleIcon() {
 }
 
 export default function LoginPage() {
+
+    const handleGoogleLogin = async () => {
+        const googleLogin = await signIn.social({
+            provider: 'google',
+            callbackURL: '/',
+            errorCallbackURL: '/login'
+        });
+
+        if (googleLogin.error) {
+            toast.error(googleLogin.error.message)
+        }
+    }
 
     return (
         <main className="grid min-h-screen bg-background lg:grid-cols-2">
@@ -116,8 +131,8 @@ export default function LoginPage() {
 
                         {/* Google Login */}
                         <button
-                            type="button"
-                            className="flex h-12 w-full items-center justify-center gap-3 rounded-xl border border-border bg-background text-sm font-semibold transition-all hover:border-primary/40 hover:bg-primary/5"
+                            type="button" onClick={handleGoogleLogin}
+                            className="flex h-12 w-full items-center justify-center gap-3 rounded-xl border border-border bg-background text-sm font-semibold transition-all hover:border-primary/40 hover:bg-primary/5 cursor-pointer"
                         >
                             <GoogleIcon />
                             Continue with Google

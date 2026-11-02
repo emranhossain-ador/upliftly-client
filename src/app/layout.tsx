@@ -1,8 +1,11 @@
 import type { Metadata } from "next";
-import { DM_Sans, Space_Grotesk } from "next/font/google";
+import { DM_Sans, Space_Grotesk, Geist } from "next/font/google";
 import "./globals.css";
 import { ToastContainer } from "react-toastify";
 import MainLayout from "@/components/MainLayout";
+import { cn } from "@/lib/utils";
+
+const geist = Geist({subsets:['latin'],variable:'--font-sans'});
 
 const dm_Sans = DM_Sans({
   variable: "--font-dm-sans",
@@ -23,7 +26,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      className={`${dm_Sans.variable} ${spaceGrotesk.variable} h-full antialiased`}
+      className={cn("h-full", "antialiased", dm_Sans.variable, spaceGrotesk.variable, "font-sans", geist.variable)}
     >
       <head>
         <script

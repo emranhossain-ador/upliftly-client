@@ -12,6 +12,7 @@ import {
     BadgeCheck,
     Sparkles,
 } from "lucide-react";
+
 import Image from "next/image";
 import ProfileQuickAction from "@/components/ProfileQuickActions";
 import { useSession } from "@/lib/auth-client";
@@ -81,7 +82,13 @@ export default function ProfilePage() {
                                     {/* Avatar */}
                                     <div className="relative mx-auto shrink-0 sm:mx-0">
                                         <div className="flex h-32 w-32 items-center justify-center overflow-hidden rounded-full border-[5px] border-background bg-primary/10 shadow-[0_0_0_3px] shadow-primary/40 sm:h-36 sm:w-36">
-                                            <Image src={'/images/avatar.jpeg'} alt="avatar" width={100} height={100} className="w-full h-full object-cover rounded-full" />
+
+                                            {
+                                                user?.image ? <Image src={user?.image} alt="avatar" width={100} height={100} className="w-full h-full object-cover rounded-full" />
+                                                    :
+                                                    <Image src={'/images/avatar.jpeg'} alt="avatar" width={100} height={100} className="w-full h-full object-cover rounded-full" />
+                                            }
+
                                         </div>
                                     </div>
 
@@ -106,6 +113,7 @@ export default function ProfilePage() {
                                                 Active Member
                                             </span>
                                         </div>
+
                                     </div>
 
                                     {/* Edit Button */}
