@@ -1,5 +1,7 @@
 import MyJoinedEventCard from "@/components/MyJoinedEventCard";
 import Breadcrumb from "@/components/ui/Breadcrumb";
+import { Suspense } from "react";
+import EventJoinedCardSkeleton from "./EventJoinedCardSkeleton";
 
 
 const JoinedEventsPage = () => {
@@ -34,9 +36,9 @@ const JoinedEventsPage = () => {
 
             {/* ================= MAIN CONTENT ================= */}
             <section className="section-container mt-12 ">
-
-                <MyJoinedEventCard />
-
+                <Suspense fallback={<EventJoinedCardSkeleton />}>
+                    <MyJoinedEventCard />
+                </Suspense>
             </section>
 
         </main>

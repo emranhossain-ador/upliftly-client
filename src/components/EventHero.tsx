@@ -1,5 +1,7 @@
+import { EventsType } from "@/type/EventsType";
 import { CalendarDays, Heart, MapPin } from "lucide-react";
 import Image from "next/image";
+import FormatDate from "./ui/formatData";
 
 
 const AfricaWatermark = ({ className = "" }: { className?: string }) => (
@@ -17,7 +19,7 @@ const attendees = [
     { initials: "RD", from: "from-cyan-300", to: "to-sky-600" },
 ];
 
-const EventHero = () => {
+const EventHero = ({ event }: { event: EventsType }) => {
     return (
         <section className="relative isolate overflow-hidden rounded-3xl bg-[linear-gradient(115deg,#062a68_0%,#0b47a3_48%,#083a8d_100%)] shadow-soft">
             {/* Soft glow + continent watermark */}
@@ -33,8 +35,8 @@ const EventHero = () => {
                         <div className="absolute inset-y-0 -left-2 w-full bg-[#7cc0ff]/80 [clip-path:ellipse(130%_110%_at_100%_55%)]" />
                     </div>
                     <Image
-                        src="/images/event-plantation.jpg"
-                        alt="Volunteers planting trees together with the local community"
+                        src={event.imageUrl}
+                        alt={event.eventTitle}
                         fill
                         priority
                         sizes="(min-width:1024px) 46vw, 100vw"
@@ -48,11 +50,11 @@ const EventHero = () => {
                         <span className="flex h-6 w-6 items-center justify-center rounded-full bg-white/20">
                             <Heart className="h-3.5 w-3.5" />
                         </span>
-                        Donation
+                        {event.eventType}
                     </span>
 
-                    <h1 className="mt-5 font-header text-5xl font-bold tracking-tight text-white sm:text-6xl xl:text-7xl">
-                        Uganda
+                    <h1 className="mt-5 font-header text-xl md:text-4xl font-bold tracking-tight text-white">
+                        {event.eventTitle}
                     </h1>
 
                     <div className="mt-5 flex flex-wrap items-center gap-x-4 gap-y-3 text-white">
@@ -60,14 +62,14 @@ const EventHero = () => {
                             <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-[#1668d4] ring-1 ring-white/15">
                                 <MapPin className="h-4 w-4" />
                             </span>
-                            <span className="text-sm font-semibold sm:text-base">Uganda</span>
+                            <span className="text-sm font-semibold sm:text-base">{event.location}</span>
                         </span>
                         <span className="h-5 w-px bg-white/25" aria-hidden />
                         <span className="flex items-center gap-2.5">
                             <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-[#1668d4] ring-1 ring-white/15">
                                 <CalendarDays className="h-4 w-4" />
                             </span>
-                            <span className="text-sm font-semibold sm:text-base">Mon, Nov 2, 2026</span>
+                            <span className="text-sm font-semibold sm:text-base">{FormatDate(event.eventDate)}</span>
                         </span>
                     </div>
 

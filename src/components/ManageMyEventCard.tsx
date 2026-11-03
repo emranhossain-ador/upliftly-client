@@ -14,7 +14,7 @@ const ManageMyEventCard = async () => {
     const userId = user?.id;
 
     // Call event api
-    const res = await fetch(`${apiUrl}/event/${userId}`);
+    const res = await fetch(`${apiUrl}/users/${userId}/events`);
     const myEvents: EventsType[] = await res.json();
 
 
@@ -47,7 +47,6 @@ const ManageMyEventCard = async () => {
             {/* Event Rows */}
             <div className="space-y-3 p-4 sm:p-5 lg:p-6">
 
-
                 {
                     myEvents.length > 0 ? (
                         myEvents.map((event) => <ManageEventArticle key={event._id} event={event} />)
@@ -61,14 +60,8 @@ const ManageMyEventCard = async () => {
                                 No events found
                             </h3>
                             <p className="mt-2 max-w-sm text-sm text-muted-foreground">
-                                We couldn't find any joined events matching
-                                your search or selected filter.
+                                We couldn't find any events.
                             </p>
-                            <button
-                                className="mt-5 rounded-xl bg-primary px-5 py-2.5 text-sm font-bold text-primary-foreground transition hover:opacity-90"
-                            >
-                                Clear Filters
-                            </button>
                         </div>
                     )
                 }

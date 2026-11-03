@@ -15,7 +15,6 @@ const quickActions = [
         title: "My Joined Events",
         description: "Every event you have signed up for.",
         href: "/events/joined",
-        count: 5,
         icon: CalendarCheck,
         color: "bg-blue-500/10 text-blue-600",
     },
@@ -23,7 +22,6 @@ const quickActions = [
         title: "Manage My Events",
         description: "Edit or remove events you organize.",
         href: "/events/manage",
-        count: 6,
         icon: ClipboardList,
         color: "bg-violet-500/10 text-violet-600",
     },
@@ -37,7 +35,7 @@ const quickActions = [
     },
 ];
 
-const ProfileQuickAction = ()=>{
+const ProfileQuickAction = () => {
     return (
         <aside className="lg:col-span-5">
 
@@ -84,12 +82,6 @@ const ProfileQuickAction = ()=>{
                                         {action.description}
                                     </p>
                                 </div>
-
-                                {action.count !== null && (
-                                    <span className="flex h-6 min-w-6 md:h-8 md:min-w-8 shrink-0 items-center justify-center rounded-full bg-primary/10 px-2 text-sm font-bold text-primary">
-                                        {action.count}
-                                    </span>
-                                )}
 
                                 <div className="flex h-8 w-8 md:h-9 md:w-9 shrink-0 items-center justify-center rounded-full bg-secondary text-primary transition-all group-hover:bg-primary group-hover:text-primary-foreground">
                                     <ArrowRight className="w-4 h-4 md:h-5 md:w-5" />

@@ -18,6 +18,7 @@ interface FormErrors {
     eventDescription?: string;
 }
 
+const ALLOWED_IMAGE_HOSTS = ["images.unsplash.com", "plus.unsplash.com"];
 
 const apiUrl = process.env.NEXT_PUBLIC_SERVER_URL;
 
@@ -42,6 +43,27 @@ const CreateEventForm = () => {
         const eventDescription = String(formData.get('eventDescription') ?? "").trim();
 
         const newError: FormErrors = {};
+
+
+        if (!imageUrl) {
+            newError.imageUrl = "Image URL is required!";
+        } else {
+            let parsed: URL | null = null;
+            try {
+                parsed = new URL(imageUrl);
+            } catch {
+                parsed = null;
+            }
+
+            if (!parsed) {
+                newError.imageUrl = "Please enter a valid image URL!";
+            } else if (parsed.protocol !== "https:") {
+                newError.imageUrl = "Image URL must start with https://!";
+            } else if (!ALLOWED_IMAGE_HOSTS.includes(parsed.hostname)) {
+                newError.imageUrl =
+                    "Only images.unsplash.com and plus.unsplash.com images are allowed!";
+            }
+        }
 
         if (!eventTitle) {
             newError.eventTitle = "Event title is required!";
@@ -103,8 +125,12 @@ const CreateEventForm = () => {
 
     }
 
+    const today = new Date();
+    const minDate = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, "0")}-${String(today.getDate()).padStart(2, "0")}`;
+
     return (
         <form onSubmit={handleEventSubmit} className="space-y-4">
+
 
             <div className="space-y-2">
                 <Label labelText="Event Title" isRequired={true} />
@@ -141,6 +167,7 @@ const CreateEventForm = () => {
                         Icon={CalendarDays}
                         type="date"
                         name="eventDate"
+                        min={minDate}
                         autoComplete="event-date"
                     />
                     {error.eventDate && <ValidationErrorAlert msg={error.eventDate} />}
