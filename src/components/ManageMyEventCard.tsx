@@ -1,4 +1,4 @@
-import { ArrowRight, CalendarCheck, Lightbulb, Plus, Search, SlidersHorizontal, } from "lucide-react";
+import { ArrowRight, CalendarCheck, Lightbulb, Plus, Search } from "lucide-react";
 import Link from "next/link";
 import ManageEventArticle from "./ManageEventArticle";
 
