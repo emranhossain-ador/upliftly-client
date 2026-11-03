@@ -1,6 +1,7 @@
 import EventBanner from "@/components/EventBanner";
-import EventsFilter from "@/components/EventsFilter";
-import SingleEventCard from "@/components/SingleEventCard";
+import AllEvent from "@/components/events/AllEvents";;
+import { Suspense } from "react";
+import EventListSkeleton from "./EventListSkeleton";
 
 
 const EventsPage = () => {
@@ -9,18 +10,9 @@ const EventsPage = () => {
 
             <EventBanner />
 
-            <section className="section-container space-y-10 mt-12">
-                {/* Filter Area */}
-                <EventsFilter />
-
-                <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-                    <SingleEventCard />
-                    <SingleEventCard />
-                    <SingleEventCard />
-                    <SingleEventCard />
-                    <SingleEventCard />
-                </div>
-            </section>
+            <Suspense fallback={<EventListSkeleton />}>
+                <AllEvent />
+            </Suspense>
 
         </main>
     );

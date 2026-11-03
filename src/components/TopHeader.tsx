@@ -62,7 +62,7 @@ const TopHeader = () => {
                         aria-label="My profile"
                         className="flex h-9.5 w-9.5 shrink-0 items-center justify-center border border-primary rounded-full"
                       >
-                        <Image src={'/images/avatar.jpeg'} width={36} height={36} alt="avatar" className="w-full h-full object-cover rounded-full" />
+                        <Image src={user?.image ? user.image : '/images/avatar.jpeg'} width={36} height={36} alt="avatar" className="w-full h-full object-cover rounded-full" />
                       </Link>
                     </TooltipTrigger>
 

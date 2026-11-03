@@ -16,15 +16,8 @@ import {
 import Image from "next/image";
 import ProfileQuickAction from "@/components/ProfileQuickActions";
 import { useSession } from "@/lib/auth-client";
+import FormatDate from "@/components/ui/formatData";
 
-
-const formatDate = (date: Date | string) => {
-    return new Date(date).toLocaleDateString("en-US", {
-        day: "2-digit",
-        month: "long",
-        year: "numeric",
-    });
-};
 
 export default function ProfilePage() {
 
@@ -180,7 +173,7 @@ export default function ProfilePage() {
                                     <p className="text-sm font-bold">Member Since</p>
                                     <p className="mt-1 flex items-center gap-1.5 text-sm text-muted-foreground">
                                         <CalendarDays size={14} />
-                                        {user ? formatDate(user?.createdAt) : 'N/A'}
+                                        {user ? FormatDate(user?.createdAt) : 'N/A'}
                                     </p>
                                 </div>
                             </div>

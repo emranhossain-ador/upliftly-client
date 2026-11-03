@@ -1,6 +1,6 @@
 import { Search } from "lucide-react"
 
-const EventsFilter = () => {
+const EventsFilter = ({ count }: { count: number }) => {
     return (
         <div className="mt-10 space-y-4">
             <div className=" flex flex-col gap-3 sm:flex-row">
@@ -20,7 +20,7 @@ const EventsFilter = () => {
                 <button className="rounded-full border bg-background px-4 py-1.5 text-sm font-medium text-muted-foreground transition-colors hover:bg-accent hover:text-accent-foreground">Awareness Campaign</button>
                 <button className="rounded-full border bg-background px-4 py-1.5 text-sm font-medium text-muted-foreground transition-colors hover:bg-accent hover:text-accent-foreground">Workshop</button>
             </div>
-            <p className="mt-4 md:mt-6 text-sm text-muted-foreground">8 events found</p>
+            <p className="mt-4 md:mt-6 text-sm text-muted-foreground">{count} Events found</p>
         </div>
     )
 };

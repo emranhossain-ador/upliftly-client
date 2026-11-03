@@ -1,5 +1,8 @@
 import ManageMyEventCard from "@/components/ManageMyEventCard";
 import Breadcrumb from "@/components/ui/Breadcrumb";
+import { Suspense } from "react";
+import EventCardSkeleton from "./EventCardSkeleton";
+
 
 const EventsManagePage = () => {
     return (
@@ -33,7 +36,9 @@ const EventsManagePage = () => {
             {/* ================= MAIN CONTENT ================= */}
             <section className="section-container mt-12">
 
-                <ManageMyEventCard />
+                <Suspense fallback={<EventCardSkeleton />}>
+                    <ManageMyEventCard />
+                </Suspense>
 
             </section>
 
