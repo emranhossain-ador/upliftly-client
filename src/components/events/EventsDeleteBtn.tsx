@@ -10,6 +10,7 @@ import {
     DialogHeader,
     DialogTitle,
 } from "@/components/ui/dialog";
+import { GetTokenFromClient } from "@/lib/getTokenFromClient";
 
 import { Trash2, X } from "lucide-react";
 import { useRouter } from "next/navigation";
@@ -32,9 +33,12 @@ const EventDeleteBtn = ({ eventId }: { eventId: string }) => {
     const handleDelete = async () => {
         try {
             setLoading(true);
-
+            const token = await GetTokenFromClient();
             const res = await fetch(`${apiUrl}/event/${eventId}`, {
                 method: "DELETE",
+                headers: {
+                    authorization: `Bearer ${token}`
+                }
             });
 
             const data = await res.json().catch(() => null);

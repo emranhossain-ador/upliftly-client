@@ -1,10 +1,42 @@
+"use client";
 import { EventsType } from "@/type/EventsType";
 import { ArrowRight, CalendarDays, MapPin, Users } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import FormatDate from "./ui/formatData";
+import { useEffect, useState } from "react";
+import { GetTokenFromClient } from "@/lib/getTokenFromClient";
+
+
+const apiUrl = process.env.NEXT_PUBLIC_SERVER_URL;
 
 const SingleEventCard = ({ event }: { event: EventsType }) => {
+
+    const [totalAttent, setTotalAttent] = useState();
+
+    const eventId = event._id;
+
+    useEffect(() => {
+
+        const getTotalAttent = async () => {
+
+            const token = await GetTokenFromClient();
+
+            const res = await fetch(`${apiUrl}/events/${eventId}/join-count `, {
+                headers: {
+                    authorization: `Bearer ${token}`
+                }
+            });
+            const totalAttent = await res.json();
+
+            setTotalAttent(totalAttent);
+        }
+
+        getTotalAttent();
+
+    }, [eventId]);
+
+
     return (
         <div className="group block h-full outline-none focus-visible:ring-2 focus-visible:ring-ring rounded-2xl">
             <div className="rounded-xl border bg-card text-card-foreground shadow h-full overflow-hidden transition-shadow group-hover:shadow-lg">
@@ -24,7 +56,7 @@ const SingleEventCard = ({ event }: { event: EventsType }) => {
                         <div className="rounded-md px-2.5 py-0.5 text-xs bg-primary/5 text-primary font-medium border border-primary/10">{event.eventType}</div>
                         <span className="flex items-center gap-1 text-xs text-muted-foreground">
                             <Users className="w-3.5 h-3.5" />
-                            0 joined
+                            {totalAttent} joined
                         </span>
                     </div>
 

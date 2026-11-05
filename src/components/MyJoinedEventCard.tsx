@@ -2,6 +2,7 @@ import { ArrowRight, CalendarCheck, Lightbulb, Search } from "lucide-react";
 import Link from "next/link";
 import EventArticle from "./EventArticle";
 import { getSession } from "@/lib/getSession";
+import { GetTokenFromSever } from "@/lib/getTokenFromServer";
 
 
 interface EventJoinedProps {
@@ -17,9 +18,15 @@ const apiUrl = process.env.NEXT_PUBLIC_SERVER_URL;
 
 const MyJoinedEventCard = async () => {
 
+    const token = await GetTokenFromSever();
+
     const user = await getSession();
     const userId = user?.id;
-    const res = await fetch(`${apiUrl}/user/event-joined/${userId}`);
+    const res = await fetch(`${apiUrl}/user/event-joined/${userId}`, {
+        headers: {
+            authorization: `Bearer ${token}`
+        }
+    });
     const eventJoined: EventJoinedProps[] = await res.json();
 
 

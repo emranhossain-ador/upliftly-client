@@ -6,7 +6,8 @@ interface InputProps {
     autoComplete?: string;
     isRequired?: boolean;
     className?: string;
-    min?: string
+    min?: string;
+    defaultValue?: string
 }
 
 const Input = ({
@@ -17,7 +18,8 @@ const Input = ({
     autoComplete,
     isRequired = false,
     className = "",
-    min
+    min,
+    defaultValue
 }: InputProps) => {
     return (
         <input
@@ -29,6 +31,7 @@ const Input = ({
             required={isRequired}
             min={min}
             className={`h-12 w-full rounded-xl border border-input bg-background pl-11 pr-4 text-sm outline-none transition-all placeholder:text-muted-foreground/70 focus:border-primary focus:ring-4 focus:ring-primary/10 ${className}`}
+            defaultValue={defaultValue}
         />
     );
 };

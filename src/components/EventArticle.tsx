@@ -3,6 +3,8 @@ import { ArrowRight, CalendarDays, Clock3, MapPin, Users, X } from "lucide-react
 import Image from "next/image";
 import Link from "next/link";
 import FormatDate from "./ui/formatData";
+import EventLeaveButton from "./events/EventLeaveButton";
+import { GetTokenFromSever } from "@/lib/getTokenFromServer";
 
 interface EventJoinedProps {
     _id: string;
@@ -15,7 +17,14 @@ interface EventJoinedProps {
 const apiUrl = process.env.NEXT_PUBLIC_SERVER_URL;
 
 const EventArticle = async ({ joinedEvent }: { joinedEvent: EventJoinedProps }) => {
-    const res = await fetch(`${apiUrl}/events/${joinedEvent.eventId}`);
+
+    const token = await GetTokenFromSever();
+
+    const res = await fetch(`${apiUrl}/events/${joinedEvent.eventId} `, {
+        headers: {
+            authorization: `Bearer ${token}`
+        }
+    });
     const event: EventsType = await res.json();
 
 
@@ -79,13 +88,8 @@ const EventArticle = async ({ joinedEvent }: { joinedEvent: EventJoinedProps }) 
                         <ArrowRight size={15} />
                     </Link>
 
-                    <button
-                        type="button"
-                        title="Leave event"
-                        className="flex items-center justify-center cursor-pointer rounded-md px-4 py-2 gap-1.5 text-sm font-semibold border border-red-400/50 text-red-500 transition hover:bg-rose-500 hover:text-white"
-                    >
-                        <X size={16} strokeWidth={3} /> Leave
-                    </button>
+                    <EventLeaveButton joinedEventId={joinedEvent._id} userId={joinedEvent.userId} />
+
                 </div>
             </div>
         </article>

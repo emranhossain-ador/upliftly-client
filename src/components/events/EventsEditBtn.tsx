@@ -13,6 +13,7 @@ import {
 
 import Label from "@/components/ui/Label";
 import ValidationErrorAlert from "@/components/ui/validationErrorAlert";
+import { GetTokenFromClient } from "@/lib/getTokenFromClient";
 import { EventsType } from "@/type/EventsType";
 import {
     CalendarDays,
@@ -127,10 +128,13 @@ const EventsEditBtn = ({ event }: { event: EventsType }) => {
         try {
             setLoading(true);
 
+            const token = await GetTokenFromClient();
+
             const res = await fetch(`${apiUrl}/event/${event._id}`, {
                 method: "PATCH",
                 headers: {
                     "Content-Type": "application/json",
+                    authorization: `Bearer ${token}`,
                 },
                 body: JSON.stringify({
                     eventTitle: form.eventTitle.trim(),

@@ -2,11 +2,12 @@
 
 import IconInput from "@/components/ui/IconInput"
 import Label from "@/components/ui/Label"
-import { CalendarDays, Image, MapPin, MousePointerClick, TriangleAlert, TypeOutline } from "lucide-react"
+import { CalendarDays, Image, MapPin, MousePointerClick, TypeOutline } from "lucide-react"
 import { useState, type FormEvent } from "react";
 import ValidationErrorAlert from "../ui/validationErrorAlert";
 import { toast } from "react-toastify";
 import { useSession } from "@/lib/auth-client";
+import { GetTokenFromClient } from "@/lib/getTokenFromClient";
 
 
 interface FormErrors {
@@ -94,10 +95,13 @@ const CreateEventForm = () => {
         if (Object.keys(newError).length === 0) {
             setIsLoading(true);
             try {
+                const token = await GetTokenFromClient();
+
                 const res = await fetch(`${apiUrl}/event`, {
                     method: 'POST',
                     headers: {
-                        'Content-Type': 'application/json'
+                        'Content-Type': 'application/json',
+                        authorization: `Bearer ${token}`
                     },
                     body: JSON.stringify({
                         user_id: user?.id as string,

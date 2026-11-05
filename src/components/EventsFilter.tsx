@@ -18,10 +18,10 @@ const categories = [
     "Cleanup",
     "Plantation",
     "Donation",
+    "Winter Relief",
     "Food Drive",
-    "Blood Donation",
-    "Awareness Campaign",
-    "Workshop",
+    "Health Camp",
+    "Education",
 ];
 
 const EventsFilter = ({

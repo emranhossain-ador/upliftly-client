@@ -3,8 +3,6 @@ import {
     UserRound,
     Mail,
     Pencil,
-    CalendarCheck,
-    ClipboardList,
     Heart,
     MapPin,
     CalendarDays,
@@ -17,6 +15,8 @@ import Image from "next/image";
 import ProfileQuickAction from "@/components/ProfileQuickActions";
 import { useSession } from "@/lib/auth-client";
 import FormatDate from "@/components/ui/formatData";
+import ProfileStatistics from "@/components/ProfileStatistics";
+import ProfileEditBtn from "@/components/ProfileEditBtn";
 
 
 export default function ProfilePage() {
@@ -110,55 +110,15 @@ export default function ProfilePage() {
                                     </div>
 
                                     {/* Edit Button */}
-                                    <button
-                                        className="inline-flex h-11 shrink-0 items-center justify-center gap-2 rounded-xl border border-primary/20 bg-background px-5 text-sm font-semibold text-foreground shadow-sm transition hover:border-primary hover:bg-primary/5"
-                                    >
-                                        <Pencil size={16} />
-                                        Edit Profile
-                                    </button>
+                                    <ProfileEditBtn />
+
                                 </div>
 
                                 <div className="my-8 border-t border-border" />
 
                                 {/* Statistics */}
-                                <div className="grid grid-cols-3 gap-2 sm:gap-4">
+                                <ProfileStatistics userId={user?.id as string} />
 
-                                    <div className="rounded-2xl bg-secondary p-3 text-center sm:p-5">
-                                        <div className="mx-auto mb-2 flex h-11 w-11 items-center justify-center rounded-xl bg-primary/10 text-primary sm:h-12 sm:w-12">
-                                            <CalendarCheck size={23} />
-                                        </div>
-                                        <h3 className="font-display text-2xl font-extrabold text-primary sm:text-3xl">
-                                            5
-                                        </h3>
-                                        <p className="mt-1 text-xs font-medium text-muted-foreground sm:text-sm">
-                                            Joined Events
-                                        </p>
-                                    </div>
-
-                                    <div className="rounded-2xl bg-secondary p-3 text-center sm:p-5">
-                                        <div className="mx-auto mb-2 flex h-11 w-11 items-center justify-center rounded-xl bg-primary/10 text-primary sm:h-12 sm:w-12">
-                                            <ClipboardList size={23} />
-                                        </div>
-                                        <h3 className="font-display text-2xl font-extrabold text-primary sm:text-3xl">
-                                            6
-                                        </h3>
-                                        <p className="mt-1 text-xs font-medium text-muted-foreground sm:text-sm">
-                                            Organized Events
-                                        </p>
-                                    </div>
-
-                                    <div className="rounded-2xl bg-secondary p-3 text-center sm:p-5">
-                                        <div className="mx-auto mb-2 flex h-11 w-11 items-center justify-center rounded-xl bg-primary/10 text-primary sm:h-12 sm:w-12">
-                                            <Heart size={23} />
-                                        </div>
-                                        <h3 className="font-display text-2xl font-extrabold text-primary sm:text-3xl">
-                                            24+
-                                        </h3>
-                                        <p className="mt-1 text-xs font-medium text-muted-foreground sm:text-sm">
-                                            Community Impact
-                                        </p>
-                                    </div>
-                                </div>
                             </div>
                         </div>
 

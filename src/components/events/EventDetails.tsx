@@ -6,6 +6,7 @@ import { UserType } from "@/type/UserType";
 import Image from "next/image";
 import Link from "next/link";
 import { getSession } from "@/lib/getSession";
+import { GetTokenFromSever } from "@/lib/getTokenFromServer";
 
 
 
@@ -116,12 +117,22 @@ const EventDetails = async ({ params }: { params: Promise<{ eventid: string }> }
     const session = await getSession();
     const loginUserId = session?.id;
 
-    const res = await fetch(`${apiUrl}/events/${eventid}`);
+    const token = await GetTokenFromSever();
+
+    const res = await fetch(`${apiUrl}/events/${eventid}`, {
+        headers: {
+            authorization: `Bearer ${token}`
+        }
+    });
     const event: EventsType = await res.json();
 
 
     // Get Event created user info
-    const userRes = await fetch(`${apiUrl}/user/${event.user_id}`);
+    const userRes = await fetch(`${apiUrl}/user/${event.user_id}`, {
+        headers: {
+            authorization: `Bearer ${token}`
+        }
+    });
     const user: UserType = await userRes.json();
 
     return (

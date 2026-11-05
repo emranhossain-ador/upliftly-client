@@ -14,7 +14,6 @@ const social = [
 
 const Footer = () => {
 
-
     return (
         <footer className="mt-16 border-t bg-card">
             <div className="section-container space-y-5 sm:space-y-0 py-10 grid w-full md:grid-cols-4">
@@ -42,7 +41,6 @@ const Footer = () => {
                             )
                         }
 
-
                     </div>
                 </div>
                 <div>
@@ -57,10 +55,10 @@ const Footer = () => {
                             <Link href="/events" className="text-foreground/70 transition-colors hover:text-primary">Upcoming Events</Link>
                         </li>
                         <li>
-                            <Link href="/create-event" className="text-foreground/70 transition-colors hover:text-primary">Create Event</Link>
+                            <Link href="/events/create" className="text-foreground/70 transition-colors hover:text-primary">Create Event</Link>
                         </li>
                         <li>
-                            <Link href="/joined-events" className="text-foreground/70 transition-colors hover:text-primary">Joined Events</Link>
+                            <Link href="/events/joined" className="text-foreground/70 transition-colors hover:text-primary">Joined Events</Link>
                         </li>
                         <li>
                             <Link href="/profile" className="text-foreground/70 transition-colors hover:text-primary">Profile</Link>

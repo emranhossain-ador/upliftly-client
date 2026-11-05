@@ -2,6 +2,7 @@
 "use client";
 
 import { useSession } from "@/lib/auth-client";
+import { GetTokenFromClient } from "@/lib/getTokenFromClient";
 import { ArrowRight, CircleCheckBig, LoaderCircle, UsersRound } from "lucide-react";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
@@ -23,6 +24,9 @@ const JoinEventBtn = ({ eventid }: { eventid: string }) => {
         let cancelled = false;
 
         const checkJoinStatus = async () => {
+
+            const token = await GetTokenFromClient();
+
             // Wait until the session has loaded before checking
             if (!userId) {
                 if (!session.isPending) setState("idle");
@@ -31,7 +35,12 @@ const JoinEventBtn = ({ eventid }: { eventid: string }) => {
 
             try {
                 const res = await fetch(
-                    `${apiUrl}/user/event-joined?userId=${userId}&eventId=${eventid}`
+                    `${apiUrl}/user/event-joined?userId=${userId}&eventId=${eventid}`,
+                    {
+                        headers: {
+                            authorization: `Bearer ${token}`
+                        }
+                    }
                 );
 
                 if (!res.ok) return;
@@ -63,10 +72,13 @@ const JoinEventBtn = ({ eventid }: { eventid: string }) => {
         try {
             setState("joining");
 
+            const token = await GetTokenFromClient();
+
             const res = await fetch(`${apiUrl}/user/event-joined`, {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    authorization: `Bearer ${token}`
                 },
                 body: JSON.stringify({
                     eventId: eventid,
@@ -115,8 +127,8 @@ const JoinEventBtn = ({ eventid }: { eventid: string }) => {
             disabled={isDisabled}
             aria-pressed={isJoined}
             className={`group flex w-full items-center gap-4 rounded-2xl p-4 text-left text-white shadow-soft transition-transform sm:p-5 ${isJoined
-                    ? "cursor-default bg-linear-to-r from-[#0f7a4d] to-[#15a866]"
-                    : "cursor-pointer bg-linear-to-r from-[#0b47a3] to-[#1668d4] hover:scale-[1.01] disabled:cursor-wait disabled:opacity-80"
+                ? "cursor-default bg-linear-to-r from-[#0f7a4d] to-[#15a866]"
+                : "cursor-pointer bg-linear-to-r from-[#0b47a3] to-[#1668d4] hover:scale-[1.01] disabled:cursor-wait disabled:opacity-80"
                 }`}
         >
             <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-white/15 ring-1 ring-white/20">

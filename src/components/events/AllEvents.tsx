@@ -6,6 +6,7 @@ import EventsFilter from "@/components/EventsFilter";
 import SingleEventCard from "@/components/SingleEventCard";
 import { EventsType } from "@/type/EventsType";
 import { Search } from "lucide-react";
+import { GetTokenFromClient } from "@/lib/getTokenFromClient";
 
 const apiUrl = process.env.NEXT_PUBLIC_SERVER_URL;
 
@@ -18,8 +19,11 @@ const AllEvent = () => {
 
     useEffect(() => {
         const fetchEvents = async () => {
+
             try {
                 setLoading(true);
+
+                const token = await GetTokenFromClient();
 
                 const params = new URLSearchParams();
 
@@ -34,7 +38,12 @@ const AllEvent = () => {
                 params.append("sort", sort);
 
                 const res = await fetch(
-                    `${apiUrl}/events?${params.toString()}`
+                    `${apiUrl}/events?status=upcoming&${params.toString()}`,
+                    {
+                        headers: {
+                            authorization: `Bearer ${token}`
+                        }
+                    }
                 );
 
                 if (!res.ok) {

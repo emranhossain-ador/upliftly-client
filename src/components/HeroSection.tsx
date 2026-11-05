@@ -1,23 +1,42 @@
 import Image from "next/image";
 import Link from "next/link";
 import {
-    CalendarDays,
-    MapPinned,
-    Users,
-    Building2,
     ArrowRight,
     HeartPlus,
 } from "lucide-react"
+import HeroStats from "./HeroStats";
+
+import { Skeleton } from "@/components/ui/skeleton";
+import { Suspense } from "react";
+
+const StatisticsSkeleton = () => {
+    return (
+        <div className=" section-container -mt-10 relative z-10">
+            <div className="grid grid-cols-2 gap-3 rounded-2xl border bg-card p-4 shadow-soft sm:gap-6 sm:p-6 lg:grid-cols-4">
+
+                {Array.from({ length: 4 }).map((_, index) => (
+                    <div key={index} className="flex items-center gap-4">
+
+                        {/* Icon Skeleton */}
+                        <Skeleton className="h-14 w-14 shrink-0 rounded-2xl" />
+
+                        {/* Text Skeleton */}
+                        <div className="space-y-2">
+                            <Skeleton className="h-7 w-12 rounded-md" />
+                            <Skeleton className="h-4 w-28 max-w-full rounded-md" />
+                        </div>
+
+                    </div>
+                ))}
+
+            </div>
+        </div>
+    );
+};
+
 
 
 const HeroSection = () => {
-
-    const stats = [
-        { icon: CalendarDays, value: "12", label: "Upcoming Events" },
-        { icon: Users, value: "1.2K", label: "Active Volunteers" },
-        { icon: MapPinned, value: "8", label: "Communities" },
-        { icon: Building2, value: "5", label: "Cities" },
-    ];
 
     return (
         <div>
@@ -52,21 +71,10 @@ const HeroSection = () => {
             </section>
 
             {/* Stats */}
-            <section className="section-container -mt-10 relative z-10">
-                <div className="grid grid-cols-2 gap-3 rounded-2xl border bg-card p-4 shadow-soft sm:gap-6 sm:p-6 lg:grid-cols-4">
-                    {stats.map(({ icon: Icon, value, label }) => (
-                        <div key={label} className="flex items-center gap-3 sm:gap-4">
-                            <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary sm:h-12 sm:w-12">
-                                <Icon className="h-5 w-5 sm:h-6 sm:w-6" />
-                            </span>
-                            <div>
-                                <p className="font-display text-xl font-bold sm:text-2xl">{value}</p>
-                                <p className="text-xs text-muted-foreground sm:text-sm">{label}</p>
-                            </div>
-                        </div>
-                    ))}
-                </div>
-            </section>
+            <Suspense fallback={<StatisticsSkeleton />}>
+                <HeroStats />
+            </Suspense>
+
         </div>
     )
 }

@@ -1,20 +1,27 @@
 import { ArrowRight, CalendarCheck, Lightbulb, Plus, Search } from "lucide-react";
 import Link from "next/link";
 import ManageEventArticle from "./ManageEventArticle";
-
 import { getSession } from "@/lib/getSession";
 import { EventsType } from "@/type/EventsType";
+import { GetTokenFromSever } from "@/lib/getTokenFromServer";
 
 
 const apiUrl = process.env.NEXT_PUBLIC_SERVER_URL;
 
 const ManageMyEventCard = async () => {
+
+    const token = await GetTokenFromSever();
+
     // Get user ID 
     const user = await getSession();
     const userId = user?.id;
 
     // Call event api
-    const res = await fetch(`${apiUrl}/users/${userId}/events`);
+    const res = await fetch(`${apiUrl}/users/${userId}/events`, {
+        headers: {
+            authorization: `Bearer ${token}`
+        }
+    });
     const myEvents: EventsType[] = await res.json();
 
 
@@ -40,7 +47,7 @@ const ManageMyEventCard = async () => {
                 </div>
 
                 <div>
-                    <Link href={'/events/create'} className="px-4 py-2.5 rounded-md bg-primary text-white font-semibold text-sm transition-all hover:bg-primary/90 shadow-md shadow-primary/40 flex items-center gap-1.5 hover:shadow-none"><Plus size={16} strokeWidth={3} /> Create Events</Link>
+                    <Link href={'/events/create'} className="px-4 py-2.5 rounded-md bg-primary text-white font-semibold text-sm transition-all hover:bg-primary/90 shadow-md shadow-primary/40 flex items-center gap-1.5 hover:shadow-none justify-center"><Plus size={16} strokeWidth={3} /> Create Events</Link>
                 </div>
             </div>
 

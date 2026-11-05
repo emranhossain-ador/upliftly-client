@@ -1,7 +1,8 @@
 import { EventsType } from "@/type/EventsType";
-import { CalendarDays, Heart, MapPin } from "lucide-react";
+import { CalendarDays, Heart, MapPin, Users } from "lucide-react";
 import Image from "next/image";
 import FormatDate from "./ui/formatData";
+import { GetTokenFromSever } from "@/lib/getTokenFromServer";
 
 
 const AfricaWatermark = ({ className = "" }: { className?: string }) => (
@@ -12,14 +13,22 @@ const AfricaWatermark = ({ className = "" }: { className?: string }) => (
 );
 
 
-const attendees = [
-    { initials: "AK", from: "from-sky-400", to: "to-blue-600" },
-    { initials: "MJ", from: "from-teal-400", to: "to-emerald-600" },
-    { initials: "SA", from: "from-indigo-400", to: "to-violet-600" },
-    { initials: "RD", from: "from-cyan-300", to: "to-sky-600" },
-];
+const apiUrl = process.env.NEXT_PUBLIC_SERVER_URL;
 
-const EventHero = ({ event }: { event: EventsType }) => {
+const EventHero = async ({ event }: { event: EventsType }) => {
+
+    const token = await GetTokenFromSever();
+
+    const eventId = event._id;
+
+    const res = await fetch(`${apiUrl}/events/${eventId}/join-count`, {
+        headers: {
+            authorization: `Bearer ${token}`
+        }
+    });
+
+    const totalAttent = await res.json();
+
     return (
         <section className="relative isolate overflow-hidden rounded-3xl bg-[linear-gradient(115deg,#062a68_0%,#0b47a3_48%,#083a8d_100%)] shadow-soft">
             {/* Soft glow + continent watermark */}
@@ -77,21 +86,11 @@ const EventHero = ({ event }: { event: EventsType }) => {
                         Join us to our communities.
                     </p>
 
-                    <div className="mt-7 flex flex-wrap items-center gap-4">
-                        <div className="flex -space-x-3">
-                            {attendees.map(({ initials, from, to }) => (
-                                <span
-                                    key={initials}
-                                    className={`flex h-9 w-9 items-center justify-center rounded-full bg-linear-to-br ${from} ${to} text-[10px] font-bold text-white ring-2 ring-[#0a3d91] sm:h-10 sm:w-10`}
-                                >
-                                    {initials}
-                                </span>
-                            ))}
-                            <span className="flex h-9 w-9 items-center justify-center rounded-full bg-[#1668d4] text-[11px] font-bold text-white ring-2 ring-[#0a3d91] sm:h-10 sm:w-10">
-                                +24
-                            </span>
-                        </div>
-                        <p className="text-sm font-medium text-white/90">24 people are joining</p>
+                    <div className="mt-7 flex flex-wrap items-center gap-2">
+                        <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-[#1668d4] ring-1 ring-white/15 text-white">
+                            <Users className="h-4 w-4" />
+                        </span>
+                        <p className="text-sm font-medium text-white/90">{totalAttent} people are joining</p>
                     </div>
                 </div>
             </div>

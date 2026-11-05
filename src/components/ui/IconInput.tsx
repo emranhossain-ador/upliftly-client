@@ -9,9 +9,10 @@ interface IconInputProps {
     autoComplete?: string;
     isRequired?: boolean;
     min?: string;
+    defaultValue?: string;
 }
 
-const IconInput = ({ Icon, type, placeholder, name, autoComplete, min, isRequired = false }: IconInputProps) => {
+const IconInput = ({ Icon, type, placeholder, name, autoComplete, min, isRequired = false, defaultValue }: IconInputProps) => {
     return (
         <div className="group relative">
             <Icon className="absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground transition-colors group-focus-within:text-primary" />
@@ -22,6 +23,7 @@ const IconInput = ({ Icon, type, placeholder, name, autoComplete, min, isRequire
                 autoComplete={autoComplete}
                 isRequired={isRequired}
                 min={min}
+                defaultValue={defaultValue}
             />
         </div>
     )
