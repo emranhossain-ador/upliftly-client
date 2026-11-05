@@ -2,7 +2,6 @@
 import {
     UserRound,
     Mail,
-    Pencil,
     Heart,
     MapPin,
     CalendarDays,

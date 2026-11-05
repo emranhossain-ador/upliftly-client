@@ -4,7 +4,6 @@ import EventHero from "../EventHero";
 import { EventsType } from "@/type/EventsType";
 import { UserType } from "@/type/UserType";
 import Image from "next/image";
-import Link from "next/link";
 import { getSession } from "@/lib/getSession";
 import { GetTokenFromSever } from "@/lib/getTokenFromServer";
 
@@ -101,12 +100,12 @@ const Sidebar = ({ user, eventid, loginUserId }: { user: UserType, eventid: stri
                     </p>
                 </div>
             </div>
-            <Link href={`/profile/${user._id}`}
+            <button
                 className="relative mt-5 flex w-full items-center justify-center gap-2 rounded-xl border border-primary/25 bg-primary/5 py-2.5 text-sm font-semibold text-primary transition-colors hover:bg-primary/10"
             >
                 View Profile
                 <ArrowRight className="h-4 w-4" />
-            </Link>
+            </button>
         </div>
     </aside>
 );
