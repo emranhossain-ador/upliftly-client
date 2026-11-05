@@ -1,4 +1,4 @@
-import { GetTokenFromSever } from "@/lib/getTokenFromServer";
+
 import {
     CalendarDays,
     CalendarCheck,
@@ -10,14 +10,8 @@ const apiUrl = process.env.NEXT_PUBLIC_SERVER_URL;
 
 const HeroStats = async () => {
 
-    const token = await GetTokenFromSever();
-
     // Get Total Upcomming events
-    const response = await fetch(`${apiUrl}/dashboard/statistics`, {
-        headers: {
-            authorization: `Bearer ${token}`
-        }
-    });
+    const response = await fetch(`${apiUrl}/dashboard/statistics`);
     const data = await response.json();
     const statistics = data.statistics;
 

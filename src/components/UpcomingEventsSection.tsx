@@ -8,7 +8,6 @@ import SingleEventCard from "./SingleEventCard";
 import { EventsType } from "@/type/EventsType";
 import { useEffect, useState } from "react";
 import EventCardSkeleton from "./events/EventCardSkeleton";
-import { GetTokenFromClient } from "@/lib/getTokenFromClient";
 
 const apiUrl = process.env.NEXT_PUBLIC_SERVER_URL;
 
@@ -19,14 +18,7 @@ const UpcomingEventsSection = () => {
     useEffect(() => {
         const getCommingEvents = async () => {
             try {
-
-                const token = await GetTokenFromClient();
-
-                const res = await fetch(`${apiUrl}/latest-events`, {
-                    headers: {
-                        authorization: `Bearer ${token}`
-                    }
-                });
+                const res = await fetch(`${apiUrl}/latest-events`);
 
                 if (!res.ok) {
                     throw new Error("Failed to fetch events");

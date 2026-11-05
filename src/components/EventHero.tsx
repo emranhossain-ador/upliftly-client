@@ -2,7 +2,6 @@ import { EventsType } from "@/type/EventsType";
 import { CalendarDays, Heart, MapPin, Users } from "lucide-react";
 import Image from "next/image";
 import FormatDate from "./ui/formatData";
-import { GetTokenFromSever } from "@/lib/getTokenFromServer";
 
 
 const AfricaWatermark = ({ className = "" }: { className?: string }) => (
@@ -17,15 +16,9 @@ const apiUrl = process.env.NEXT_PUBLIC_SERVER_URL;
 
 const EventHero = async ({ event }: { event: EventsType }) => {
 
-    const token = await GetTokenFromSever();
-
     const eventId = event._id;
 
-    const res = await fetch(`${apiUrl}/events/${eventId}/join-count`, {
-        headers: {
-            authorization: `Bearer ${token}`
-        }
-    });
+    const res = await fetch(`${apiUrl}/events/${eventId}/join-count`);
 
     const totalAttent = await res.json();
 

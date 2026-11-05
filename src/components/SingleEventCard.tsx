@@ -5,7 +5,6 @@ import Image from "next/image";
 import Link from "next/link";
 import FormatDate from "./ui/formatData";
 import { useEffect, useState } from "react";
-import { GetTokenFromClient } from "@/lib/getTokenFromClient";
 
 
 const apiUrl = process.env.NEXT_PUBLIC_SERVER_URL;
@@ -20,13 +19,7 @@ const SingleEventCard = ({ event }: { event: EventsType }) => {
 
         const getTotalAttent = async () => {
 
-            const token = await GetTokenFromClient();
-
-            const res = await fetch(`${apiUrl}/events/${eventId}/join-count `, {
-                headers: {
-                    authorization: `Bearer ${token}`
-                }
-            });
+            const res = await fetch(`${apiUrl}/events/${eventId}/join-count`);
             const totalAttent = await res.json();
 
             setTotalAttent(totalAttent);

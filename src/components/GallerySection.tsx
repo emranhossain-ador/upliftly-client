@@ -4,7 +4,6 @@ import GalleryCard from "./GalleryCard";
 import { useEffect, useState } from "react";
 import { EventsType } from "@/type/EventsType";
 import GallerySkeleton from "./GallerySkeleton";
-import { GetTokenFromClient } from "@/lib/getTokenFromClient";
 
 
 
@@ -18,12 +17,7 @@ const GallerySection = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const token = await GetTokenFromClient();
-                const response = await fetch(`${apiUrl}/events?status=completed`, {
-                    headers: {
-                        authorization: `Bearer ${token}`
-                    }
-                });
+                const response = await fetch(`${apiUrl}/events?status=completed`);
                 const data = await response.json();
 
                 setEndEvents(data);
